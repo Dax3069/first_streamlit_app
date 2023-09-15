@@ -28,7 +28,7 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 streamlit.dataframe(fruits_to_show)
 
 # New header for fruit vice
-streamlit.header("Fruityvice Fruit Advice!")
+streamlit.header("View Our Fruit List - Add Your Favorites!")
 # Add a text box for a query about the fruit
 # fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
 # streamlit.write('The user entered ', fruit_choice)
@@ -67,9 +67,10 @@ def get_fruit_load_list():
     return my_cur.fetchall()
 
 # Add button for display
-if streamlit.button('Get fruit load list'):
+if streamlit.button('Get Fruit List'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_data_rows = get_fruit_load_list()
+  my_cnx.close()
   streamlit.dataframe(my_data_rows)
 
 # Stop here
@@ -101,5 +102,6 @@ add_my_fruit = streamlit.text_input('What fruit would you like to add?')
 if streamlit.button('Add fruit to the list'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   back_from_function = insert_row_snowflake(add_my_fruit)
+  my_cnx.close()
   streamlit.text(back_from_function)
 
