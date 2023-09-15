@@ -1,2 +1,6 @@
 # requirements.txt
-snowflake-connector-python
+# snowflake-connector-python
+snowflake-connector-python[pandas]
+
+pyarrow<8.1.0,>=8.0.0
+
